@@ -61,6 +61,9 @@ class Tweet(BaseModel):
     update_at : Optional[datetime] = Field(default=None)
     by : User = Field(...)
 
+#____________functions_______________
+
+
 
 #______________________Path Operations__________________________
 
@@ -185,7 +188,24 @@ def update_user():
     tags=["Tweets"]
     )
 def home():
-    return {"twitter":"funcionando"}
+    """
+    Show the all tweets
+
+    this path operation shows the all tweets in the app
+
+    Parameters:
+        - 
+    Returns a json with the basic tweet information
+        - tweetId : UUID
+        - content : str
+        - create_at : datetime 
+        - update_at 
+        - by : User  
+    """
+    with open ("tweets.json","r",encoding="utf-8") as f:
+        results=json.loads(f.read())
+        return results
+
 
 ###post a tweet
 @app.post(
@@ -195,8 +215,35 @@ def home():
     summary="Post a tweet",
     tags=["Tweets"]
 )
-def post_tweet():
-    pass
+def post_tweet(tweet:Tweet = Body(...)):
+    """
+    Post a tweet
+
+    This path operation register a tweet in the app
+
+    Parameters:
+        - Request body parameter 
+            - tweet : Tweet
+    
+    Returns a json with the basic tweet information
+        - tweetId : UUID
+        - content : str
+        - create_at : datetime 
+        - update_at 
+        - by : User 
+    """
+    with open("tweets.json","r+", encoding="utf-8") as f:  #leer archivo
+        results = json.loads(f.read())     #caragar en formato json
+        tweets_dict = tweet.dict()   #convertir clase a diccionario
+        tweets_dict["tweetId"] = str(tweets_dict["tweetId"]) #cambiar atributos a str
+        tweets_dict["create_at"] = str(tweets_dict["create_at"])
+        tweets_dict["update_at"] = str(tweets_dict["update_at"])
+        tweets_dict["by"]["userId"] = str(tweets_dict["by"]["userId"])
+        tweets_dict["by"]["birth_date"] = str(tweets_dict["by"]["birth_date"])
+        results.append(tweets_dict)
+        f.seek(0)
+        f.write(json.dumps(results)) #escribir usuario en el archivo
+        return tweet
 
 ###show a tweet
 @app.get(
