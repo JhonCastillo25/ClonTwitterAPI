@@ -1,4 +1,5 @@
 from dataclasses import field
+from pickle import TRUE
 from uuid import UUID
 from datetime import date
 from typing import Optional,List
@@ -120,7 +121,24 @@ def login():
     tags=["User"]
 )
 def show_all_users():
-    pass
+    """
+    Show the all users
+
+    this path operation shows the all users in the app
+
+    Parameters:
+        - 
+    Return a json list with the all users in the app
+        - userId : UUID
+        - email : EmailStr
+        - firstname : str
+        - last name : str
+        - birth date : date
+    """
+    with open ("users.json","r",encoding="utf-8") as f:
+        results=json.loads(f.read())
+        return results
+
 
 ### show a user
 @app.get(
@@ -212,3 +230,5 @@ def delete_tweet():
 )
 def update_tweet():
     pass
+
+
