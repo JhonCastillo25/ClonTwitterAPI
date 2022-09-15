@@ -1,0 +1,34 @@
+[
+    {
+        "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa5",
+        "email": "jhon@example.com",
+        "firstname": "john",
+        "lastname": "string",
+        "birth_date": "2022-09-14",
+        "password": "hshshshshshs"
+    },
+    {
+        "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "email": "Luffy@example.com",
+        "firstname": "Luffy",
+        "lastname": "D monkey",
+        "birth_date": "2022-09-14",
+        "password": "reypirata"
+    },
+    {
+        "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa7",
+        "email": "Luffy@example.com",
+        "firstname": "zoro",
+        "lastname": "roronoa",
+        "birth_date": "2022-09-12",
+        "password": "espadachinmamado"
+    },
+    {
+        "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa8",
+        "email": "Nami@example.com",
+        "firstname": "nami",
+        "lastname": "gata",
+        "birth_date": "2020-09-12",
+        "password": "navegante"
+    }
+]
