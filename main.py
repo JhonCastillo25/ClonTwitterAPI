@@ -1,5 +1,7 @@
 from dataclasses import field
+from http.client import HTTPException
 from pickle import TRUE
+from unittest import result
 from uuid import UUID
 from datetime import date
 from typing import Optional,List
@@ -12,8 +14,8 @@ from pydantic import EmailStr,Field
 
 #fastApi
 from fastapi import FastAPI
-from fastapi import status
-from fastapi import Body
+from fastapi import status,HTTPException
+from fastapi import Body,Path,Query,Form
 
 app= FastAPI()
 
@@ -151,8 +153,33 @@ def show_all_users():
     summary="Show a user",
     tags=["User"]
 )
-def show_a_user():
-    pass
+def show_a_user(
+    userId: UUID = Path(...),
+    ):
+    """
+    Show a one user
+
+    this path operation shows the one users in the app for id
+
+    Parameters:
+        userId
+    Return a json list with the all users in the app
+        - userId : UUID
+        - email : EmailStr
+        - firstname : str
+        - last name : str
+        - birth date : date
+    """
+    with open("users.json","r",encoding="utf-8") as f:
+        results = json.loads(f.read())
+        id = str(userId)
+        for data in results:
+            if  data["userId"] == id:
+                return data
+            else:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="user not found")
+
+
 
 ### delete a user
 @app.delete(
@@ -253,8 +280,30 @@ def post_tweet(tweet:Tweet = Body(...)):
     summary="Show a tweet",
     tags=["Tweets"]
 )
-def show_tweet():
-    pass
+def show_tweet(tweetId:UUID = Path(...)):
+    """
+    Show a one tweet by id
+
+    this path operation shows the one tweet in the app by id
+
+    Parameters:
+        tweetId:UUID
+    Returns a json with the basic tweet information
+        - tweetId : UUID
+        - content : str
+        - create_at : datetime 
+        - update_at 
+        - by : User 
+    """
+    with open("tweets.json","r",encoding="utf-8") as f:
+        results = json.loads(f.read())
+        id = str(tweetId)
+        for data in results:
+            if  data["tweetId"] == id:
+                return data
+            else:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Tweet not found")
+
 
 ### delete a tweet
 @app.delete(
@@ -264,8 +313,34 @@ def show_tweet():
     summary="Delete a tweet",
     tags=["Tweets"]
 )
-def delete_tweet():
-    pass
+def delete_tweet(tweetId:UUID = Path(...)):
+    """
+    Delete a one tweet by id
+
+    this path operation delete the one tweet in the app by id
+
+    Parameters:
+        tweetId:UUID
+    Returns a json with the basic tweet information
+        - tweetId : UUID
+        - content : str
+        - create_at : datetime 
+        - update_at 
+        - by : User 
+    """
+    with open("tweets.json","r+",encoding="utf-8") as f:
+        results = json.loads(f.read())
+        id = str(tweetId)
+        for data in results:
+            if  data["tweetId"] == id:
+                
+                results.remove(data)
+                with open("tweets.json", "w", encoding="utf-8") as f:
+                    f.seek(0)
+                    f.write(json.dumps(results))
+                    return data
+            else:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Tweet not found")
 
 ### update a tweet
 @app.put(
@@ -275,7 +350,42 @@ def delete_tweet():
     summary="Update a tweet",
     tags=["Tweets"]
 )
-def update_tweet():
-    pass
+def update_tweet(
+    tweetId:UUID = Path(...),
+    content: str = Form(
+        ..., 
+        min_length=1,
+        max_length=256)):
+    """
+    Update a one tweet by id
+
+    this path operation update the one tweet in the app by id
+
+    Parameters:
+        tweetId:UUID
+        content
+    Returns a json with the basic tweet information
+        - tweetId : UUID
+        - content : str
+        - create_at : datetime 
+        - update_at 
+        - by : User 
+    """
+    with open("tweets.json","r+",encoding="utf-8") as f:
+        results = json.loads(f.read())
+        id = str(tweetId)
+        for data in results:
+            if  data["tweetId"] == id:
+                data['content'] = content
+                data['updated_at'] = str(datetime.now())
+                
+                with open("tweets.json", "w", encoding="utf-8") as f:
+                    f.seek(0)
+                    f.write(json.dumps(results))
+                    return data
+            else:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Tweet not found")
+
+    
 
 
