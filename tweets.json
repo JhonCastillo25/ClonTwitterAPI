@@ -1,1 +1,68 @@
-[{"tweetId": "3fa85f64-5717-4562-b3fc-2c963f66afb2", "content": "modificado", "create_at": "2022-09-15 11:31:49.143992", "update_at": "2022-09-15 16:32:34.637000+00:00", "by": {"userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6", "email": "borrar@example.com", "firstname": "borrar", "lastname": "superborrado", "birth_date": "2022-09-15"}, "updated_at": "2022-09-15 12:07:39.981997"}, {"tweetId": "3fa85f64-5717-4562-b3fc-2c963f66afa9", "content": "this is the last try", "create_at": "2022-09-15 11:47:57.498620", "update_at": "2022-09-15 16:51:01.910000+00:00", "by": {"userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6", "email": "erased@example.com", "firstname": "clean", "lastname": "clean", "birth_date": "2022-09-15"}}, {"tweetId": "3fa85f64-5717-4562-b3fc-2c963f66afa9", "content": "this is the last try", "create_at": "2022-09-15 11:47:57.498620", "update_at": "2022-09-15 16:51:01.910000+00:00", "by": {"userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6", "email": "erased@example.com", "firstname": "clean", "lastname": "clean", "birth_date": "2022-09-15"}}, {"tweetId": "3fa85f64-5717-4562-b3fc-2c963f66afa2", "content": "nuevo tweet", "create_at": "2022-09-15 12:04:00.581474", "update_at": "2022-09-15 17:04:13.895000+00:00", "by": {"userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6", "email": "yolo@example.com", "firstname": "string", "lastname": "string", "birth_date": "2022-09-15"}}, {"tweetId": "3fa85f64-5717-4562-b3fc-2c963f66afa1", "content": "nuevo tweet", "create_at": "2022-09-15 12:04:00.581474", "update_at": "2022-09-15 17:04:13.895000+00:00", "by": {"userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6", "email": "yolo@example.com", "firstname": "string", "lastname": "string", "birth_date": "2022-09-15"}}]
+[
+    {
+        "tweetId": "3fa85f64-5717-4562-b3fc-2c963f66afb2",
+        "content": "modificado",
+        "create_at": "2022-09-15 11:31:49.143992",
+        "update_at": "2022-09-15 16:32:34.637000+00:00",
+        "by": {
+            "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "email": "borrar@example.com",
+            "firstname": "borrar",
+            "lastname": "superborrado",
+            "birth_date": "2022-09-15"
+        },
+        "updated_at": "2022-09-15 12:07:39.981997"
+    },
+    {
+        "tweetId": "3fa85f64-5717-4562-b3fc-2c963f66afa9",
+        "content": "this is the last try",
+        "create_at": "2022-09-15 11:47:57.498620",
+        "update_at": "2022-09-15 16:51:01.910000+00:00",
+        "by": {
+            "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "email": "erased@example.com",
+            "firstname": "clean",
+            "lastname": "clean",
+            "birth_date": "2022-09-15"
+        }
+    },
+    {
+        "tweetId": "3fa85f64-5717-4562-b3fc-2c963f66afa9",
+        "content": "this is the last try",
+        "create_at": "2022-09-15 11:47:57.498620",
+        "update_at": "2022-09-15 16:51:01.910000+00:00",
+        "by": {
+            "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "email": "erased@example.com",
+            "firstname": "clean",
+            "lastname": "clean",
+            "birth_date": "2022-09-15"
+        }
+    },
+    {
+        "tweetId": "3fa85f64-5717-4562-b3fc-2c963f66afa2",
+        "content": "nuevo tweet",
+        "create_at": "2022-09-15 12:04:00.581474",
+        "update_at": "2022-09-15 17:04:13.895000+00:00",
+        "by": {
+            "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "email": "yolo@example.com",
+            "firstname": "string",
+            "lastname": "string",
+            "birth_date": "2022-09-15"
+        }
+    },
+    {
+        "tweetId": "3fa85f64-5717-4562-b3fc-2c963f66afa1",
+        "content": "nuevo tweet",
+        "create_at": "2022-09-15 12:04:00.581474",
+        "update_at": "2022-09-15 17:04:13.895000+00:00",
+        "by": {
+            "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "email": "yolo@example.com",
+            "firstname": "string",
+            "lastname": "string",
+            "birth_date": "2022-09-15"
+        }
+    }
+]

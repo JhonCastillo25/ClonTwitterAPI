@@ -106,17 +106,6 @@ def signup(user:UserRegister = Body(...)):
         f.write(json.dumps(results)) #escribir usuario en el archivo
         return user
 
-### login a user
-@app.post(
-    path="/login",
-    response_model=User,
-    status_code=status.HTTP_200_OK,
-    summary="Login a user",
-    tags=["User"]
-)
-def login():
-    pass
-
 ### show all users
 @app.get(
     path="/users",
@@ -143,7 +132,6 @@ def show_all_users():
     with open ("users.json","r",encoding="utf-8") as f:
         results=json.loads(f.read())
         return results
-
 
 ### show a user
 @app.get(
@@ -179,8 +167,6 @@ def show_a_user(
             else:
                 raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="user not found")
 
-
-
 ### delete a user
 @app.delete(
     path="/users/{userId}/delete",
@@ -189,8 +175,33 @@ def show_a_user(
     summary="Delete a user",
     tags=["User"]
 )
-def delete_user():
-    pass
+def delete_user(
+    userId: UUID = Path(...),
+    ):
+    """
+    Delete a one user
+
+    this path operation delete the one users in the app for id
+
+    Parameters:
+        userId
+    Return a json list with the all users in the app
+        - userId : UUID
+        - email : EmailStr
+        - firstname : str
+        - last name : str
+        - birth date : date
+    """
+    with open("users.json","r+",encoding="utf-8") as f:
+        results = json.loads(f.read())
+        id = str(userId)
+        for data in results:
+            if  data["userId"] == id:
+                results.remove(data)
+                f.seek(0)
+                f.write(json.dumps(results))
+            else:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="user not found")
 
 ### update a user
 @app.put(
@@ -200,8 +211,41 @@ def delete_user():
     summary="Update a user",
     tags=["User"]
 )
-def update_user():
-    pass
+def update_user(
+    userId: UUID = Path(...),
+    firstname : str = Form(...,max_length=25,min_length=1),
+    lastname: str = Form(...,max_length=25,min_length=1),
+    email : EmailStr = Form(...),
+    birth_date : date = Form(...)
+    ):
+    """
+    Update user by Id
+
+    this path operation delete the one users in the app by id
+
+    Parameters:
+        userId
+    Return a json list with the all users in the app
+        - userId : UUID
+        - email : EmailStr
+        - firstname : str
+        - last name : str
+        - birth date : date
+    """
+    with open("users.json","r+",encoding="utf-8") as f:
+        results = json.loads(f.read())
+        id = str(userId)
+        for data in results:
+            if  data["userId"] == id:
+                data["firstname"]=firstname
+                data["lastname"]=lastname
+                data["email"]=email
+                data["birth_date"]=str(birth_date)
+                
+                f.seek(0)
+                f.write(json.dumps(results))
+            else:
+                raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="user not found")
 
 
 ##___Tweets
@@ -378,7 +422,7 @@ def update_tweet(
             if  data["tweetId"] == id:
                 data['content'] = content
                 data['updated_at'] = str(datetime.now())
-                
+                results.update(data)
                 with open("tweets.json", "w", encoding="utf-8") as f:
                     f.seek(0)
                     f.write(json.dumps(results))
